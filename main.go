@@ -16,6 +16,6 @@ func getUserInput() float64 {
 	return userInput
 }
 
-func calculateCurrency(count float64, originalCurrency float64, targetCurrency float64) {
-	
+func calculateCurrency(amount float64, originalCurrency string, targetCurrency string) {
+
 }
