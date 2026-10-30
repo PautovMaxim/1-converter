@@ -8,3 +8,14 @@ func main() {
 	const EurToRub = usdToRub / usdToEur
 	fmt.Println(usdToEur,usdToRub,EurToRub)
 }
+
+func getUserInput() float64 {
+	var userInput float64
+	fmt.Println("Введите число: ")
+	fmt.Scan(&userInput)
+	return userInput
+}
+
+func calculateCurrency(count float64, originalCurrency float64, targetCurrency float64) {
+	
+}
