@@ -8,39 +8,37 @@ var targetCurrency string
 var result float64
 
 func main() {
-	choiseOriginalCurrency()
+	originalCurrency = readCurrency ("Выберите целевую валюту (USD, EUR, RUB): ")
 	getUserAmount()
-	choiseTargetCurrency()
+	targetCurrency = readCurrency ("Выберите целевую валюту (USD, EUR, RUB): ")
 	result = calculateCurrency(amount, originalCurrency, targetCurrency)
 	fmt.Printf("Итоговое значение: %.2f ", result)
 }
 
-func choiseOriginalCurrency() {
+func readCurrency (prompt string) string {
+	var currency string
 	for {
-		fmt.Println("Выберите исходную валюту (USD, EUR, RUB): ")
-		fmt.Scan(&originalCurrency)	
-		if originalCurrency == "USD" || originalCurrency == "EUR" || originalCurrency == "RUB" {
-			break;
+		fmt.Println(prompt)
+		fmt.Scan(&currency)
+		if currency == "USD" || currency == "EUR" || currency == "RUB" {
+			return currency
 		}
+
+		fmt.Println("Некорректная валюта. Попробуйте ещё раз")
 	}
 }
 
 func getUserAmount() {
 	for {
 		fmt.Println("Введите число: ")
-		fmt.Scan(&amount)
-		if amount > 0 {
-			break;
+		_, err := fmt.Scan(&amount)
+		
+		if err != nil {
+			fmt.Println("Ошибка! Введите корректное число.")
+			continue
 		}
-	}
-	
-}
 
-func choiseTargetCurrency() {
-	for {
-		fmt.Println("Выберите целевую валюту (USD, EUR, RUB): ")
-		fmt.Scan(&targetCurrency)	
-		if originalCurrency == "USD" || originalCurrency == "EUR" || originalCurrency == "RUB" {
+		if amount > 0 {
 			break;
 		}
 	}
@@ -59,6 +57,8 @@ func calculateCurrency(amount float64, originalCurrency string, targetCurrency s
 		result = amount * 92.33
 	} else if originalCurrency == "RUB" && targetCurrency == "EUR" {
 		result = amount / 92.33
-	} 
+	} else if originalCurrency == targetCurrency {
+		result = amount
+	}
 	return result
 }
