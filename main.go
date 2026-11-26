@@ -8,7 +8,7 @@ var targetCurrency string
 var result float64
 
 func main() {
-	originalCurrency = readCurrency ("Выберите целевую валюту (USD, EUR, RUB): ")
+	originalCurrency = readCurrency ("Выберите исходную валюту (USD, EUR, RUB): ")
 	getUserAmount()
 	targetCurrency = readCurrency ("Выберите целевую валюту (USD, EUR, RUB): ")
 	result = calculateCurrency(amount, originalCurrency, targetCurrency)
@@ -35,12 +35,15 @@ func getUserAmount() {
 		
 		if err != nil {
 			fmt.Println("Ошибка! Введите корректное число.")
+			var discard string
+			fmt.Scanln(&discard)
 			continue
 		}
 
 		if amount > 0 {
 			break;
 		}
+		fmt.Println("Число должно быть больше нуля.")
 	}
 }
 
